@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Chat bergas</title>
+
+	<!--Lista de estilos-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/styles.css">
+
+	<!--Fuente de letra-->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto" rel="stylesheet"> 
+
+	<!--Libreria de emojis-->
+	<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+
+	<!--Fuente de iconos-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/FontAwesome.otf">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.eot">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.svg">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.ttf">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 25px Helvetica, Arial; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee;
+                        }
+    </style>
+  </head>
+  <body>
+
+      <input type="text" id="nombre" class="form-control" placeholder="Ingresa tu nombre prro">
+
+      <div class="container">
+          <div class="row">
+              <div class="panel panel-default">
+                <div class="panel-heading">Chat bergas</div>
+                <div class="panel-body">
+                  <div class="container">
+                      <div class="container" id="messages">
+
+                      </div>
+                  </div>
+                  <div class="panel-footer">
+                       <div class="input-group">
+                        <form action="">
+                          <input type="text" id="m" class="form-control">
+                          <span class="input-group-btn">
+                            <button class="btn btn-default" id="btnEnviar" type="button">Enviar</button>
+                          </span>
+                        </form>
+                      </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </div>
+    <script src="js/scripts.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+    $(function () {
+      var socket = io();
+      
+      $('form').submit(function(){
+        socket.emit('chat message', $("#nombre").val() +": " +  $('#m').val());
+        $('#m').val('');
+        return false;
+      });
+      socket.on('chat message', function(msg){
+        $('#messages').append($('<div class="row message-bubble"><span>Why is yo shit so broke?</span></div>').text(msg));
+      });
+    });
+</script>
+  </body>
+</html>
