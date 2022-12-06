@@ -9,7 +9,7 @@
   "author": "Luis Fernando Contreras Guerra",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.2",
+    "express": "^4.18.2",
     "socket.io": "^2.0.4"
   }
 }
